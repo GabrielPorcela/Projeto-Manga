@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core Studio — Mangá Brasileiro</title>
+  <meta name="description" content="Core Studio é um estúdio brasileiro de mangá que constrói mundos, heróis e histórias com identidade nacional e técnica de ponta.">
+
+  <!-- Tipografia: display condensada para impacto editorial + sans humanista para leitura -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Link de acessibilidade: permite pular direto para o conteúdo via teclado -->
+  <a class="skip-link" href="#main">Saltar para o conteúdo</a>
+
+  <!-- ============================================ -->
+  <!-- HEADER / NAVEGAÇÃO                            -->
+  <!-- ============================================ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header__inner">
+
+      <a href="#top" class="logo" aria-label="Core Studio — página inicial">
+        <span class="logo__mark" aria-hidden="true">core</span>
+        <span class="logo__text">STUDIO</span>
+      </a>
+
+      <!-- Botão hambúrguer: visível apenas em telas pequenas -->
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        aria-expanded="false"
+        aria-controls="primaryNav"
+        aria-label="Abrir menu de navegação"
+      >
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Navegação principal">
+        <ul class="primary-nav__list">
+          <li><a href="#sobre" class="primary-nav__link">Estúdio</a></li>
+          <li><a href="#obras" class="primary-nav__link">Obras</a></li>
+          <li><a href="#contato" class="primary-nav__link">Contato</a></li>
+        </ul>
+        <a href="#contato" class="btn btn--small primary-nav__cta">Fale com a gente</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================ -->
+    <!-- HERO SECTION                                  -->
+    <!-- ============================================ -->
+    <section class="hero" id="top">
+      <!-- Textura de screentone (pontos de meio-tom) puramente decorativa -->
+      <div class="hero__screentone" aria-hidden="true"></div>
+      <div class="hero__vignette" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+
+        <div class="hero__copy" data-reveal>
+          <p class="eyebrow">
+            <span class="eyebrow__bracket" aria-hidden="true">[</span>
+            ESTÚDIO BRASILEIRO DE MANGÁ
+            <span class="eyebrow__bracket" aria-hidden="true">]</span>
+          </p>
+
+          <h1 class="hero__title">
+            Histórias que
+            <span class="hero__title-accent">sangram</span>
+            tinta nacional.
+          </h1>
+
+          <p class="hero__subtitle">
+            A Core Studio cria mangás autorais — roteiro, arte e edição
+            feitos no Brasil, para o mundo. Sem tradução de cultura.
+            Apenas histórias com sotaque próprio.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#obras" class="btn btn--primary">
+              Ver nossas obras
+              <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="#sobre" class="btn btn--ghost">Conhecer o estúdio</a>
+          </div>
+        </div>
+
+        <!-- Espaço para imagem de impacto de um personagem -->
+        <div class="hero__art" data-reveal>
+          <div class="hero__art-frame">
+            <!--
+              SUBSTITUIR pela arte oficial do personagem principal.
+              Recomendado: PNG com fundo transparente, mínimo 1200x1600px.
+              Caminho sugerido: assets/img/hero-character.png
+            -->
+            <img
+              src="https://images.unsplash.com/photo-1612036782180-6f0822045d23?q=80&w=1200&auto=format&fit=crop"
+              alt="Arte conceitual de um personagem original da Core Studio, em estilo mangá, com iluminação dramática"
+              class="hero__art-img"
+              loading="eager"
+            >
+            <span class="hero__art-tag">VOL. 01 — COVER ART</span>
+          </div>
+          <div class="hero__art-corner hero__art-corner--tl" aria-hidden="true"></div>
+          <div class="hero__art-corner hero__art-corner--br" aria-hidden="true"></div>
+        </div>
+
+      </div>
+
+      <a href="#sobre" class="hero__scroll" aria-label="Rolar para a próxima seção">
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+        SCROLL
+      </a>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SOBRE O ESTÚDIO                               -->
+    <!-- ============================================ -->
+    <section class="about" id="sobre">
+      <div class="container">
+
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow">A MISSÃO</p>
+          <h2 class="section-heading__title">
+            Mangá é técnica.<br>
+            Identidade é alma.
+          </h2>
+        </div>
+
+        <div class="about__grid">
+
+          <div class="about__lede" data-reveal>
+            <p>
+              Nascemos da convicção de que o Brasil tem histórias tão fortes
+              quanto qualquer outra cultura editorial do planeta — e que elas
+              merecem ser contadas na linguagem visual do mangá, sem perder
+              a textura do que é nosso.
+            </p>
+          </div>
+
+          <div class="about__details" data-reveal>
+            <p>
+              A Core Studio reúne roteiristas, ilustradores e editores
+              dedicados a construir universos com a mesma rigidez técnica
+              das grandes editoras japonesas: composição de página,
+              ritmo narrativo, contraste de tinta e expressão de personagem
+              trabalhados a cada traço.
+            </p>
+            <p>
+              Não fazemos cópias. Fazemos mangá brasileiro — com nossas
+              cores, nossos conflitos e nossas referências, publicado para
+              um público que já não cabe em fronteiras.
+            </p>
+
+            <ul class="about__stats" aria-label="Números do estúdio">
+              <li class="about__stat">
+                <span class="about__stat-number">04</span>
+                <span class="about__stat-label">Obras originais em produção</span>
+              </li>
+              <li class="about__stat">
+                <span class="about__stat-number">100%</span>
+                <span class="about__stat-label">Roteiro e arte nacionais</span>
+              </li>
+              <li class="about__stat">
+                <span class="about__stat-number">∞</span>
+                <span class="about__stat-label">Capítulos planejados</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- OBRAS / GALERIA                               -->
+    <!-- ============================================ -->
+    <section class="works" id="obras">
+      <div class="container">
+
+        <div class="section-heading section-heading--row" data-reveal>
+          <div>
+            <p class="eyebrow">O CATÁLOGO</p>
+            <h2 class="section-heading__title">Nossas obras</h2>
+          </div>
+          <p class="section-heading__note">
+            Artes conceituais e capas em produção. Role para explorar.
+          </p>
+        </div>
+
+        <div class="works__grid">
+
+          <!-- Card de obra 01 -->
+          <article class="work-card" data-reveal>
+            <div class="work-card__frame">
+              <img
+                src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=900&auto=format&fit=crop"
+                alt="Capa conceitual da obra Ronin de Aço, ilustração estilo mangá de um guerreiro urbano"
+                class="work-card__img"
+                loading="lazy"
+              >
+              <span class="work-card__index">01</span>
+            </div>
+            <div class="work-card__info">
+              <h3 class="work-card__title">Ronin de Aço</h3>
+              <p class="work-card__genre">Ação / Distopia urbana</p>
+            </div>
+          </article>
+
+          <!-- Card de obra 02 -->
+          <article class="work-card" data-reveal>
+            <div class="work-card__frame">
+              <img
+                src="https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=900&auto=format&fit=crop"
+                alt="Capa conceitual da obra Sangue do Cerrado, ilustração estilo mangá ambientada no interior do Brasil"
+                class="work-card__img"
+                loading="lazy"
+              >
+              <span class="work-card__index">02</span>
+            </div>
+            <div class="work-card__info">
+              <h3 class="work-card__title">Sangue do Cerrado</h3>
+              <p class="work-card__genre">Drama / Fantasia rural</p>
+            </div>
+          </article>
+
+          <!-- Card de obra 03 -->
+          <article class="work-card" data-reveal>
+            <div class="work-card__frame">
+              <img
+                src="https://images.unsplash.com/photo-1635805737707-575885ab0820?q=80&w=900&auto=format&fit=crop"
+                alt="Capa conceitual da obra Frequência Zero, ilustração estilo mangá com tema de ficção científica"
+                class="work-card__img"
+                loading="lazy"
+              >
+              <span class="work-card__index">03</span>
+            </div>
+            <div class="work-card__info">
+              <h3 class="work-card__title">Frequência Zero</h3>
+              <p class="work-card__genre">Sci-fi / Suspense</p>
+            </div>
+          </article>
+
+          <!-- Card de obra 04 -->
+          <article class="work-card" data-reveal>
+            <div class="work-card__frame">
+              <img
+                src="https://images.unsplash.com/photo-1614583225154-5fcdda07019e?q=80&w=900&auto=format&fit=crop"
+                alt="Capa conceitual da obra Véu de Cinzas, ilustração estilo mangá com tema sombrio e sobrenatural"
+                class="work-card__img"
+                loading="lazy"
+              >
+              <span class="work-card__index">04</span>
+            </div>
+            <div class="work-card__info">
+              <h3 class="work-card__title">Véu de Cinzas</h3>
+              <p class="work-card__genre">Horror / Sobrenatural</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONTATO / CTA FINAL                           -->
+    <!-- ============================================ -->
+    <section class="contact" id="contato">
+      <div class="contact__screentone" aria-hidden="true"></div>
+
+      <div class="container contact__inner" data-reveal>
+        <p class="eyebrow">VAMOS CONVERSAR</p>
+        <h2 class="contact__title">
+          Tem uma história<br>
+          pra contar com a gente?
+        </h2>
+        <p class="contact__subtitle">
+          Seja parceria, publicação ou só pra trocar uma ideia sobre mangá —
+          o canal está aberto.
+        </p>
+
+        <div class="contact__actions">
+          <a
+            href="https://wa.me/5500000000000"
+            class="btn btn--primary btn--large"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Falar no WhatsApp
+            <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <ul class="social-list" aria-label="Redes sociais da Core Studio">
+          <li>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-list__link">
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-list__link">
+              Twitter / X
+            </a>
+          </li>
+          <li>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-list__link">
+              TikTok
+            </a>
+          </li>
+          <li>
+            <a href="mailto:contato@corestudio.com.br" class="social-list__link">
+              E-mail
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                        -->
+  <!-- ============================================ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <a href="#top" class="logo logo--small" aria-label="Core Studio — voltar ao topo">
+        <span class="logo__mark" aria-hidden="true">core</span>
+        <span class="logo__text">STUDIO</span>
+      </a>
+      <p class="site-footer__copy">
+        © <span id="currentYear">2026</span> Core Studio. Mangá feito no Brasil.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

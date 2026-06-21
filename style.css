@@ -1,0 +1,923 @@
+/* ===========================================================
+   CORE STUDIO — STYLESHEET
+   Estrutura do arquivo:
+   1. Variáveis globais (:root)
+   2. Reset / Normalização
+   3. Estilos base (tipografia, body)
+   4. Utilitários (container, botões, eyebrow)
+   5. Header / Navegação
+   6. Hero Section
+   7. Sobre o Estúdio
+   8. Obras / Galeria
+   9. Contato / CTA Final
+   10. Footer
+   11. Animações de revelação (data-reveal)
+   12. Media Queries (mobile-first → desktop)
+   =========================================================== */
+
+
+/* ===========================================================
+   1. VARIÁVEIS GLOBAIS
+   Paleta inspirada em tinta sumi (preto quente) e papel de
+   mangá (branco amarelado), com vermelhão como cor de
+   destaque editorial/cinematográfico.
+   =========================================================== */
+:root {
+  /* --- Cores base (tons escuros profundos) --- */
+  --color-ink-black: #0a0908;      /* fundo principal — preto quente */
+  --color-panel: #14120f;          /* fundo de seções alternadas */
+  --color-card: #1d1a16;           /* fundo de cards/painéis */
+  --color-border: #322c25;         /* bordas e divisores (gutters) */
+
+  /* --- Cores de texto --- */
+  --color-paper: #ece6d9;          /* branco "papel" — texto principal */
+  --color-paper-muted: #a39a8a;    /* texto secundário */
+  --color-paper-faint: #6b6357;    /* texto terciário / legendas */
+
+  /* --- Cor de acento (vermelhão cinematográfico) --- */
+  --color-accent: #ff4318;
+  --color-accent-dim: #c2330f;
+  --color-accent-soft: rgba(255, 67, 24, 0.12);
+
+  /* --- Tipografia --- */
+  --font-display: 'Anton', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* --- Espaçamento (escala consistente) --- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* --- Layout --- */
+  --container-max: 1240px;
+  --container-pad: 1.25rem;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  /* --- Transições --- */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+}
+
+
+/* ===========================================================
+   2. RESET / NORMALIZAÇÃO
+   =========================================================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Respeita usuários que preferem menos animação */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input,
+textarea {
+  font: inherit;
+}
+
+
+/* ===========================================================
+   3. ESTILOS BASE
+   =========================================================== */
+body {
+  background-color: var(--color-ink-black);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Link de pular navegação — invisível até receber foco via teclado */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-sm);
+  background: var(--color-accent);
+  color: var(--color-ink-black);
+  padding: var(--space-xs) var(--space-md);
+  font-weight: 700;
+  font-size: 0.875rem;
+  z-index: 999;
+  border-radius: var(--radius-sm);
+  transition: top var(--duration-fast) var(--ease-default);
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}
+
+/* Foco visível e consistente em toda a página (acessibilidade) */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400; /* Anton já é bold por natureza */
+  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+p {
+  max-width: 65ch;
+}
+
+
+/* ===========================================================
+   4. UTILITÁRIOS
+   =========================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* --- Eyebrow: rótulo pequeno acima dos títulos de seção --- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.eyebrow__bracket {
+  color: var(--color-paper-faint);
+}
+
+/* --- Botões --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.6rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  transition: transform var(--duration-fast) var(--ease-default),
+              background-color var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-ink-black);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-paper);
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  border-color: var(--color-border);
+  color: var(--color-paper);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-paper-muted);
+  background-color: var(--color-card);
+}
+
+.btn--small {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.75rem;
+}
+
+.btn--large {
+  padding: 1.1rem 2rem;
+  font-size: 0.95rem;
+}
+
+.btn__arrow {
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
+}
+
+/* --- Cabeçalho de seção reutilizável --- */
+.section-heading {
+  margin-bottom: var(--space-xl);
+}
+
+.section-heading__title {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+}
+
+.section-heading--row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.section-heading__note {
+  color: var(--color-paper-muted);
+  font-size: 0.95rem;
+  max-width: 32ch;
+}
+
+
+/* ===========================================================
+   5. HEADER / NAVEGAÇÃO
+   =========================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--duration-base) var(--ease-default),
+              background-color var(--duration-base) var(--ease-default);
+}
+
+/* Classe adicionada via JS quando o usuário rola a página */
+.site-header.is-scrolled {
+  background-color: rgba(10, 9, 8, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom-color: var(--color-border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-md);
+}
+
+/* --- Logo --- */
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  z-index: 110;
+}
+
+.logo__mark {
+  color: var(--color-accent);
+}
+
+.logo--small {
+  font-size: 1.05rem;
+}
+
+/* --- Botão hambúrguer (mobile) --- */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  z-index: 110;
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-paper);
+  transition: transform var(--duration-fast) var(--ease-default),
+              opacity var(--duration-fast) var(--ease-default);
+}
+
+/* Estado "aberto" do hambúrguer — vira um X. Classe alternada via JS */
+.nav-toggle.is-active .nav-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-active .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-active .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Navegação principal (mobile = painel fullscreen) --- */
+.primary-nav {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-ink-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  transform: translateX(100%);
+  transition: transform var(--duration-slow) var(--ease-default);
+}
+
+/* Estado "aberto" do menu mobile — classe alternada via JS */
+.primary-nav.is-open {
+  transform: translateX(0);
+}
+
+.primary-nav__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.primary-nav__link {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.primary-nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width var(--duration-base) var(--ease-default);
+}
+
+.primary-nav__link:hover::after {
+  width: 100%;
+}
+
+.primary-nav__cta {
+  display: none; /* CTA do header só aparece no desktop, fica no Hero/Contato no mobile */
+}
+
+
+/* ===========================================================
+   6. HERO SECTION
+   =========================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6rem;
+  padding-bottom: var(--space-2xl);
+  overflow: hidden;
+  background-color: var(--color-ink-black);
+}
+
+/* Textura de meio-tom (screentone) — efeito clássico de impressão de mangá */
+.hero__screentone {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 14px 14px;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse 80% 60% at 70% 30%, black 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Vinheta para aprofundar o clima cinematográfico nas bordas */
+.hero__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 50%, transparent 40%, var(--color-ink-black) 100%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.hero__copy {
+  max-width: 36rem;
+}
+
+.hero__title {
+  font-size: clamp(2.75rem, 9vw, 5.5rem);
+  margin-bottom: var(--space-md);
+}
+
+.hero__title-accent {
+  color: var(--color-accent);
+}
+
+.hero__subtitle {
+  color: var(--color-paper-muted);
+  font-size: 1.05rem;
+  margin-bottom: var(--space-lg);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* --- Frame de arte do personagem --- */
+.hero__art {
+  position: relative;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+.hero__art-frame {
+  position: relative;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-panel);
+  overflow: hidden;
+}
+
+.hero__art-img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  filter: grayscale(15%) contrast(1.08);
+}
+
+.hero__art-tag {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-accent);
+  color: var(--color-ink-black);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 0.7rem;
+}
+
+/* Marcas de canto — referência às marcas de corte usadas em impressão editorial */
+.hero__art-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--color-accent);
+  pointer-events: none;
+}
+
+.hero__art-corner--tl {
+  top: -8px;
+  left: -8px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hero__art-corner--br {
+  bottom: -8px;
+  right: -8px;
+  border-left: none;
+  border-top: none;
+}
+
+/* --- Indicador de scroll --- */
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--color-paper-faint);
+  z-index: 1;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 28px;
+  background-color: var(--color-paper-faint);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background-color: var(--color-accent);
+  animation: scrollLine 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(250%); }
+}
+
+
+/* ===========================================================
+   7. SOBRE O ESTÚDIO
+   =========================================================== */
+.about {
+  padding-block: var(--space-3xl);
+  background-color: var(--color-panel);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.about__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.about__lede p {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.4vw, 2rem);
+  text-transform: none;
+  line-height: 1.3;
+  color: var(--color-paper);
+  max-width: 28ch;
+}
+
+.about__details p {
+  color: var(--color-paper-muted);
+  margin-bottom: var(--space-md);
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.about__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.about__stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  color: var(--color-accent);
+}
+
+.about__stat-label {
+  font-size: 0.8rem;
+  color: var(--color-paper-faint);
+  line-height: 1.4;
+}
+
+
+/* ===========================================================
+   8. OBRAS / GALERIA
+   =========================================================== */
+.works {
+  padding-block: var(--space-3xl);
+  background-color: var(--color-ink-black);
+}
+
+.works__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.work-card {
+  position: relative;
+}
+
+.work-card__frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+}
+
+.work-card__img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  filter: grayscale(20%) contrast(1.05);
+  transition: transform var(--duration-slow) var(--ease-default),
+              filter var(--duration-slow) var(--ease-default);
+}
+
+.work-card:hover .work-card__img {
+  transform: scale(1.04);
+  filter: grayscale(0%) contrast(1.1);
+}
+
+.work-card__index {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-paper);
+  background-color: rgba(10, 9, 8, 0.75);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-border);
+}
+
+.work-card__info {
+  padding-top: var(--space-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.work-card__title {
+  font-size: 1.1rem;
+}
+
+.work-card__genre {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-paper-faint);
+  white-space: nowrap;
+}
+
+
+/* ===========================================================
+   9. CONTATO / CTA FINAL
+   =========================================================== */
+.contact {
+  position: relative;
+  padding-block: var(--space-3xl);
+  background-color: var(--color-panel);
+  border-top: 1px solid var(--color-border);
+  overflow: hidden;
+  text-align: center;
+}
+
+.contact__screentone {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.25;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 0%, transparent 75%);
+  pointer-events: none;
+}
+
+.contact__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact__title {
+  font-size: clamp(2rem, 6.5vw, 3.5rem);
+  margin-bottom: var(--space-md);
+}
+
+.contact__subtitle {
+  color: var(--color-paper-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.contact__actions {
+  margin-bottom: var(--space-xl);
+}
+
+.social-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md) var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.social-list__link {
+  color: var(--color-paper-muted);
+  position: relative;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+
+.social-list__link:hover {
+  color: var(--color-accent);
+}
+
+
+/* ===========================================================
+   10. FOOTER
+   =========================================================== */
+.site-footer {
+  padding-block: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-ink-black);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  text-align: center;
+}
+
+.site-footer__copy {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-paper-faint);
+}
+
+
+/* ===========================================================
+   11. ANIMAÇÕES DE REVELAÇÃO (data-reveal)
+   Controladas via IntersectionObserver no script.js.
+   O elemento começa oculto/deslocado e ganha a classe
+   "is-visible" quando entra no viewport.
+   =========================================================== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-slow) var(--ease-default),
+              transform var(--duration-slow) var(--ease-default);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+/* ===========================================================
+   12. MEDIA QUERIES (mobile-first → desktop)
+   =========================================================== */
+
+/* --- Tablet (≥ 640px) --- */
+@media (min-width: 640px) {
+  .about__stats {
+    gap: var(--space-lg);
+  }
+
+  .works__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Desktop pequeno (≥ 768px) --- */
+@media (min-width: 768px) {
+  .hero__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hero__copy {
+    flex: 1 1 55%;
+  }
+
+  .hero__art {
+    flex: 1 1 38%;
+    margin-inline: 0;
+  }
+
+  .about__grid {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .about__lede {
+    flex: 1 1 38%;
+  }
+
+  .about__details {
+    flex: 1 1 55%;
+  }
+}
+
+/* --- Desktop (≥ 1024px) --- */
+@media (min-width: 1024px) {
+  /* Navegação volta ao layout horizontal padrão no header */
+  .nav-toggle {
+    display: none;
+  }
+
+  .primary-nav {
+    position: static;
+    inset: auto;
+    transform: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: var(--space-xl);
+    background-color: transparent;
+  }
+
+  .primary-nav__list {
+    flex-direction: row;
+    gap: var(--space-lg);
+  }
+
+  .primary-nav__link {
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .primary-nav__cta {
+    display: inline-flex;
+  }
+
+  .works__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .hero__title {
+    font-size: clamp(3.5rem, 7vw, 6rem);
+  }
+}
+
+/* --- Telas grandes (≥ 1440px) --- */
+@media (min-width: 1440px) {
+  :root {
+    --container-pad: 2rem;
+  }
+}
